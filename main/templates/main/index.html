@@ -1,0 +1,204 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Главная - Cave Server{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>Добро пожаловать в <span class="highlight">Cave</span></h1>
+        <p>Выживание, экономика, города и PvP в мрачных пещерах!</p>
+        <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                Исследовать
+            </a>
+            <a href="{% url 'register' %}" class="btn btn-secondary">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="8.5" cy="7" r="4"/>
+                    <line x1="20" y1="8" x2="20" y2="14"/>
+                    <line x1="23" y1="11" x2="17" y2="11"/>
+                </svg>
+                Начать игру
+            </a>
+        </div>
+    </div>
+</div>
+
+<section class="access-section">
+    <div class="container">
+        <div class="access-card">
+            <div class="access-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <h2>Доступ на сервер</h2>
+            <p>Купите проходку и получите доступ к игре на нашем сервере!</p>
+            
+            
+            {% if user.is_authenticated %}
+                {% if user.has_server_access %}
+                    <div class="access-success">
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Доступ уже активирован!
+                    </div>
+                    <div class="server-ip">
+                        <strong>IP для входа:</strong> 45.93.200.33:25574
+                    </div>
+                {% else %}
+                    <div class="access-warning">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        Доступ еще не куплен
+                    </div>
+                    <a href="{% url 'buy_server_access' %}" class="btn btn-access">
+                        <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        Купить доступ
+                    </a>
+                {% endif %}
+            {% else %}
+                <div class="access-auth">
+                    <p>Чтобы купить доступ, необходимо</p>
+                    <div class="access-buttons">
+                        <a href="{% url 'login' %}" class="btn btn-secondary">
+                            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                <polyline points="10 17 15 12 10 7"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                            </svg>
+                            Войти
+                        </a>
+                        <a href="{% url 'register' %}" class="btn btn-primary">
+                            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <line x1="20" y1="8" x2="20" y2="14"/>
+                                <line x1="23" y1="11" x2="17" y2="11"/>
+                            </svg>
+                            Зарегистрироваться
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <div class="container">
+        <h2>
+            <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            О сервере
+        </h2>
+        <div class="about-content">
+            <p><strong>Cave Server</strong> - уникальный проект в стиле тёмного фэнтези. Погрузись в атмосферу подземелий и древних пещер:</p>
+            <ul>
+                <li>
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v12M8 8h8M8 16h8"/>
+                    </svg>
+                    Уникальная экономическая система
+                </li>
+                <li>
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 22h20M4 22V8l6-4 6 4v14M9 12h2v2H9zM13 12h2v2h-2zM9 16h2v2H9zM13 16h2v2h-2z"/>
+                    </svg>
+                    Система городов и гильдий
+                </li>
+                <li>
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    Торговая площадка для ресурсов
+                </li>
+                <li>
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Дружное и отзывчивое комьюнити
+                </li>
+            </ul>
+            <p>Стартовый набор и система квестов помогут тебе быстро освоиться в мире Cave!</p>
+        </div>
+    </div>
+</section>
+
+<section class="featured-cities">
+    <div class="container">
+        <h2 class="glavnii">
+            <svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 22h20M4 22V8l6-4 6 4v14M9 12h2v2H9zM13 12h2v2h-2zM9 16h2v2H9zM13 16h2v2h-2z"/>
+            </svg>
+            Главные города
+        </h2>
+        <div class="cities-grid">
+            {% for city in cities %}
+            <div class="city-card">
+                {% if city.image %}
+                    <img src="{{ city.image.url }}" alt="{{ city.name }}" class="city-image">
+                {% else %}
+                    <div class="city-placeholder">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 22h20M4 22V8l6-4 6 4v14M9 12h2v2H9zM13 12h2v2h-2zM9 16h2v2H9zM13 16h2v2h-2z"/>
+                        </svg>
+                    </div>
+                {% endif %}
+                <h3>{{ city.name }}</h3>
+                <p>{{ city.description|truncatewords:15 }}</p>
+                <div class="city-stats">
+                    <span>
+                        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        {{ city.population }}
+                    </span>
+                    {% if city.is_capital %}
+                        <span class="capital-badge">
+                            <svg class="icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                            Столица
+                        </span>
+                    {% endif %}
+                </div>
+                <a href="{% url 'city_detail' city.id %}" class="btn-small">
+                    Подробнее
+                    <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+            {% empty %}
+                <p style="color: #bdbdbd;">Города скоро появятся...</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Города сервера{% endblock %}
+
+{% block content %}
+<div class="cities-page">
+    <div class="container">
+        <h1> Все города сервера Cave</h1>
+        <div class="cities-grid large-grid">
+            {% for city in cities %}
+            <div class="city-card-large">
+                {% if city.image %}
+                    <img src="{{ city.image.url }}" alt="{{ city.name }}" class="city-image-large">
+                {% else %}
+                    <div class="city-placeholder-large"></div>
+                {% endif %}
+                <div class="city-info">
+                    <h2>{{ city.name }}</h2>
+                    <p class="city-description">{{ city.description|truncatewords:30 }}</p>
+                    <div class="city-details">
+                        <p> Координаты: {{ city.coordinates }}</p>
+                        <p> Население: {{ city.population }}</p>
+                        <p> Основан: {{ city.founded_date|date:"d.m.Y" }}</p>
+                        {% if city.mayor %}
+                            <p> Мэр: {{ city.mayor.username }}</p>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'city_detail' city.id %}" class="btn btn-primary">Подробнее о городе</a>
+                </div>
+            </div>
+            {% empty %}
+                <p>Города скоро появятся!</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
